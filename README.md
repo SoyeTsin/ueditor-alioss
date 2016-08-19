@@ -5,6 +5,7 @@ aueditor for nodejs 可以让你的UEditor支持nodejs 并上传附件到阿里�
 
 ```
  丢进NODE.JS项目的这里面 node_modules
+ 记得阿里云几个模块也加上
 
 ```
 
