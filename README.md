@@ -20,7 +20,8 @@ var path = require('path');
 var app = express();
 
 var ueditor = require("ueditor");
-ueditor.initAliyunFun("region", "accessKeyId", "accessKeySecret", "对象访问的起始域名或IP");//配置阿里云对象存储获取到的几个参数，如：("oss-cn-shenzhen", "7Y2Ss1o564JJed2z", "csjRXdPub7kPb7JHGhwD0xOPEGBR8Q", "http://img.nodejsnet.com/")
+ueditor.initAliyunFun("region", "accessKeyId", "accessKeySecret", "对象访问的起始域名或IP");
+//配置阿里云对象存储获取到的几个参数，如：("oss-cn-shenzhen", "7Y2Ss1o564JJed2z", "csjRXdPub7kPb7JHGhwD0xOPEGBR8Q", "http://img.nodejsnet.com/")
 var bodyParser = require('body-parser');
 
 app.use(bodyParser.urlencoded({
