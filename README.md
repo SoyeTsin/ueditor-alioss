@@ -9,7 +9,7 @@ aueditor for nodejs 可以让你的UEditor支持nodejs 并上传附件到阿里�
  记得阿里云几个依赖的模块也加上：https://github.com/aliyun-UED/aliyun-sdk-js
  前端页面引入例子里的ueditor
  剩下的都交给插件吧
- 体验地址：http://www.nodejsnet.com/ （点发帖按钮）
+
 
 ```
 
