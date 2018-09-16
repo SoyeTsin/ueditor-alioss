@@ -1,5 +1,10 @@
 ﻿#Node.js : ueditor-aliyun
 
+安装方法：
+
+```
+npm i ueditor-aliyun
+```
 ueditor-aliyun for nodejs 可以让你的UEditor支持nodejs 并上传附件到阿里云对象存储中
 
 
