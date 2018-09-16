@@ -25,7 +25,7 @@ app.js文件中加入如下代码
 
 //这里引入我们的组件库
 var ueditor = require("ueditor-alioss");
-ueditor.initAliyunFun("oss-cn-shenzhen", "soyevip", "LTAIAEOvcub4dnjX", "WjaeXyQ2lm5Rx6LS8dfI9hoTC1yIGJ", "http://files.nodejsnet.com/");
+ueditor.initAliyunFun("oss-cn-shenzhen", "soyevip", "LTAIAEOvcub5yhjX", "WjaeXyQ2lm5Rx6LT5dfI9hoTC1yIGJ", "http://files.nodejsnet.com/");
 //参数说明：Region,Bucket,OSS_ACCESS_KEY_ID,OSS_SECRET_ACCESS_KEY，host（记得结尾加个/）
 
 
