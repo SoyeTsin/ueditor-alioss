@@ -9,23 +9,25 @@ var co = require('co');
 var OSS = require('ali-oss');
 var ossObj = {
     region: '',
+    useBucket: '',
     accessKeyId: '',
-    accessKeySecret: ''
+    accessKeySecret: '',
+    realm_name: ''
 }
 //初始化声明
 var client;
-var realm_name = "";
 var ueditor = function (static_url, handel) {
     return function (req, res, next) {
         var _respond = respond(static_url, handel);
         _respond(req, res, next);
     };
 };
-ueditor.initAliyunFun = function (region, accessKeyId, accessKeySecret, realm_name) {
+ueditor.initAliyunFun = function (region, useBucket, accessKeyId, accessKeySecret, realm_name) {
     ossObj.region = region;
+    ossObj.useBucket = useBucket;
     ossObj.accessKeyId = accessKeyId;
     ossObj.accessKeySecret = accessKeySecret;
-    realm_name = realm_name;
+    ossObj.realm_name = realm_name;
     client = new OSS(ossObj);
 };
 var respond = function (static_url, callback) {
@@ -35,26 +37,24 @@ var respond = function (static_url, callback) {
             return;
         } else if (req.query.action === 'listimage') {
             res.ue_list = function (list_dir) {
-                co(function * ()
-                {
-                    client.useBucket('bucket-soye');
-                    var result = yield client.list({
-                        'max-keys': 10
-                    });
-                    //console.log(result.objects);
-                    var list = [];
-                    for (var i in result.objects) {
-                        list.push({url: realm_name + result.objects[i].name})
+                co(function* () {
+                        client.useBucket(ossObj.useBucket);
+                        var result = yield client.list({
+                            'max-keys': 10
+                        });
+                        //console.log(result.objects);
+                        var list = [];
+                        for (var i in result.objects) {
+                            list.push({url: ossObj.realm_name + result.objects[i].name})
+                        }
+                        res.json({
+                            "state": "SUCCESS",
+                            "list": list,
+                            "start": 1,
+                            "total": result.objects.length
+                        });
                     }
-                    res.json({
-                        "state": "SUCCESS",
-                        "list": list,
-                        "start": 1,
-                        "total": result.objects.length
-                    });
-                }
-                ).
-                catch(function (err) {
+                ).catch(function (err) {
                     console.log(err);
                 });
             };
@@ -83,22 +83,20 @@ var respond = function (static_url, callback) {
                         fse.move(tmpdir, dest, function (err) {
                             if (err) throw err;
                             //setTimeout(function () {
-                            co(function * ()
-                            {
-                                client.useBucket('bucket-soye');
-                                var fileStream = fs.createReadStream(pathName + name);
-                                var result = yield client.put("/images/" + name, fileStream);//path.join(img_url, name)
-                                //console.log(result);
-                                res.json({
-                                    'url': realm_name + name,//path.join(img_url, name)
-                                    'title': req.body.pictitle,//
-                                    'original': filename,
-                                    'state': 'SUCCESS'
-                                });
-                                fs.unlink(pathName + name);//删除临时文件
-                            }
-                            ).
-                            catch(function (err) {
+                            co(function* () {
+                                    client.useBucket(ossObj.useBucket);
+                                    var fileStream = fs.createReadStream(pathName + '/' + img_url + name);
+                                    var result = yield client.put("/ueditor/" + name, fileStream);
+                                    //console.log(result);
+                                    res.json({
+                                        'url': ossObj.realm_name + "/ueditor/" + name,//path.join(img_url, name)
+                                        'title': req.body.pictitle,//
+                                        'original': filename,
+                                        'state': 'SUCCESS'
+                                    });
+                                    fs.unlink(pathName + name);//删除临时文件
+                                }
+                            ).catch(function (err) {
                                 console.log("err:::" + err);
                             });
                             //}, 5000)

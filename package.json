@@ -1,25 +1,31 @@
 {
-  "name": "aueditor",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "start": "node app.js"
-  },
-  "dependencies": {
-    "body-parser": "~1.0.0",
-    "cookie-parser": "~1.0.1",
-    "debug": "~0.7.4",
-    "ejs": "~>2.5.5",
-    "express": "~4.2.0",
-    "morgan": "~1.0.0",
-    "static-favicon": "~1.0.0",
-    "ueditor": "^1.0.0"
-  },
-  "description": "Baidu ueditor annex upload Ali cloud revision",
+  "name": "ueditor-alioss",
+  "version": "1.1.14",
+  "description": "ueditor-aliyun for nodejs 可以让你的UEditor支持nodejs 并上传附件到阿里云对象存储中",
   "main": "index.js",
-  "author": "soye",
-  "license": "UNLICENSED",
   "directories": {
     "example": "example"
-  }
+  },
+  "dependencies": {
+    "ali-oss": "^6.0.1",
+    "aliyun-sdk": "^1.11.10",
+    "body-parser": "^1.0.2",
+    "busboy": "^0.2.14",
+    "cookie-parser": "^1.0.1",
+    "debug": "^0.7.4",
+    "ejs": "^2.5.9",
+    "express": "^4.2.0",
+    "fdfs": "^1.0.4",
+    "fs-extra": "^0.11.0",
+    "morgan": "^1.0.1",
+    "node-snowflake": "0.0.1",
+    "qn": "^1.3.0",
+    "static-favicon": "^1.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
 }
